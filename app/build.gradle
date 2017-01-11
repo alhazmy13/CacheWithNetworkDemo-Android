@@ -51,9 +51,6 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
 
 
-    compile 'com.amazonaws:aws-android-sdk-core:2.3.8'
-    compile('com.amazonaws:aws-android-sdk-apigateway-core:2.3.8')
-    compile ('com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.3.8')
 
     //RxAndroid
     compile 'io.reactivex:rxandroid:1.2.1'
