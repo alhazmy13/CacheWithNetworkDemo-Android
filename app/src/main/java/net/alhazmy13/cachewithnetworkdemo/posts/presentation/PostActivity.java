@@ -55,7 +55,7 @@ public class PostActivity extends BaseActivity implements PostView, PostAdapter.
         ButterKnife.bind(this);
         ((App) getApplicationContext()).getAppComponent().inject(this);
         mAdapter = new PostAdapter(mPresenter.getPostList(), this);
-        mPresenter.init(this, new PostService(new PostRetrofitImpl(mRetrofit.create(PostRetrofitService.class)),new PostRealmImpl(this),this));
+        mPresenter.init(this, new PostService(new PostRetrofitImpl(mRetrofit.create(PostRetrofitService.class)),new PostRealmImpl(),this));
         recyclerView.setAdapter(mAdapter);
     }
 

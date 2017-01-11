@@ -28,23 +28,20 @@ import rx.subscriptions.Subscriptions;
 
 public class PostRealmImpl implements PostRepository {
     private static final String TAG = "UserRetrofitImpl";
-    private final Context mContext;
-
-    public PostRealmImpl(Context context) {
-        this.mContext = context;
+    private Realm mRealm;
+    public PostRealmImpl() {
+        this.mRealm = Realm.getDefaultInstance();
     }
 
 
 
     @Override
     public Observable<List<Post>> fetchPosts() {
-        Realm.init(mContext);
-        final Realm realm = Realm.getDefaultInstance();
-        return realm.where(Post.class).findAll().asObservable()
+        return mRealm.where(Post.class).findAll().asObservable()
                 .map(new Func1<RealmResults<Post>, List<Post>>() {
                     @Override
                     public List<Post> call(RealmResults<Post> results) {
-                        return realm.copyFromRealm(results);
+                        return mRealm.copyFromRealm(results);
                     }
                 });
 
