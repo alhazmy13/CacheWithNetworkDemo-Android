@@ -9,7 +9,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by alhazmy13 on 1/9/17.
  */
 
-public class Post extends RealmObject{
+public class Post extends RealmObject {
 
     @PrimaryKey
     @SerializedName("userId")

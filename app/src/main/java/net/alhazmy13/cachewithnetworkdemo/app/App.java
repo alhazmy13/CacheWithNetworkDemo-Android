@@ -2,11 +2,11 @@ package net.alhazmy13.cachewithnetworkdemo.app;
 
 import android.app.Application;
 
+import net.alhazmy13.cachewithnetworkdemo.utility.UrlHelper;
 import net.alhazmy13.cachewithnetworkdemo.utility.dagger.AppModule;
 import net.alhazmy13.cachewithnetworkdemo.utility.dagger.DaggerNetComponent;
 import net.alhazmy13.cachewithnetworkdemo.utility.dagger.NetComponent;
 import net.alhazmy13.cachewithnetworkdemo.utility.dagger.NetModule;
-import net.alhazmy13.cachewithnetworkdemo.utility.UrlHelper;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

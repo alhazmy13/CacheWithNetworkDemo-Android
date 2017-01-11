@@ -52,7 +52,8 @@ public class NetModule {
     Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-        gsonBuilder.registerTypeAdapter(new TypeToken<RealmList<RealmString>>(){}.getType(),
+        gsonBuilder.registerTypeAdapter(new TypeToken<RealmList<RealmString>>() {
+                }.getType(),
                 RealmStringListTypeAdapter.INSTANCE);
         return gsonBuilder.create();
     }
@@ -88,7 +89,6 @@ public class NetModule {
                 .addInterceptor(interceptor)
                 .build();
     }
-
 
 
 }

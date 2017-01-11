@@ -7,7 +7,8 @@ package net.alhazmy13.cachewithnetworkdemo.utility;
 public class UrlHelper {
     private final static String PROD_URL = "http://jsonplaceholder.typicode.com";
     private final static String DEVELOP_URL = "";
-    public static String getBaseUrl(){
+
+    public static String getBaseUrl() {
         return PROD_URL;
     }
 }

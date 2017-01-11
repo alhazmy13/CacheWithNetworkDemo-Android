@@ -17,19 +17,24 @@ public class RealmStringListTypeAdapter extends TypeAdapter<RealmList<RealmStrin
     public static final TypeAdapter<RealmList<RealmString>> INSTANCE =
             new RealmStringListTypeAdapter().nullSafe();
 
-    private RealmStringListTypeAdapter() { }
+    private RealmStringListTypeAdapter() {
+    }
 
-    @Override public void write(JsonWriter out, RealmList<RealmString> src) throws IOException {
+    @Override
+    public void write(JsonWriter out, RealmList<RealmString> src) throws IOException {
         out.beginArray();
-        for(RealmString realmString : src) { out.value(realmString.getValue()); }
+        for (RealmString realmString : src) {
+            out.value(realmString.getValue());
+        }
         out.endArray();
     }
 
-    @Override public RealmList<RealmString> read(JsonReader in) throws IOException {
+    @Override
+    public RealmList<RealmString> read(JsonReader in) throws IOException {
         RealmList<RealmString> realmStrings = new RealmList<>();
         in.beginArray();
         while (in.hasNext()) {
-            if(in.peek() == JsonToken.NULL) {
+            if (in.peek() == JsonToken.NULL) {
                 in.nextNull();
             } else {
                 RealmString realmString = new RealmString();

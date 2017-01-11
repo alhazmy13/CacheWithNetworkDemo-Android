@@ -6,6 +6,7 @@ import net.alhazmy13.cachewithnetworkdemo.posts.model.model.Post;
 import net.alhazmy13.cachewithnetworkdemo.utility.Utility;
 
 import java.util.List;
+
 import rx.Observable;
 
 public class PostService implements PostRepository {
@@ -13,6 +14,7 @@ public class PostService implements PostRepository {
     private Context mContext;
     private PostRepository mRepo;
     private PostRepository mOfflineRepo;
+
     public PostService(PostRepository repo) {
         this.mRepo = repo;
     }
@@ -26,10 +28,10 @@ public class PostService implements PostRepository {
 
     @Override
     public Observable<List<Post>> fetchPosts() {
-        if(mContext != null && !Utility.isNetworkAvailable(mContext)) {
+        if (mContext != null && !Utility.isNetworkAvailable(mContext)) {
             return mOfflineRepo.fetchPosts();
-        }else{
-            return  mRepo.fetchPosts();
+        } else {
+            return mRepo.fetchPosts();
         }
 
     }

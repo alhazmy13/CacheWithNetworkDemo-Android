@@ -3,7 +3,6 @@ package net.alhazmy13.cachewithnetworkdemo.posts.presentation;
 import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
@@ -37,6 +36,7 @@ public class PostActivity extends BaseActivity implements PostView, PostAdapter.
     private PostAdapter mAdapter;
     @BindView(R.id.list)
     RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +55,7 @@ public class PostActivity extends BaseActivity implements PostView, PostAdapter.
         ButterKnife.bind(this);
         ((App) getApplicationContext()).getAppComponent().inject(this);
         mAdapter = new PostAdapter(mPresenter.getPostList(), this);
-        mPresenter.init(this, new PostService(new PostRetrofitImpl(mRetrofit.create(PostRetrofitService.class)),new PostRealmImpl(),this));
+        mPresenter.init(this, new PostService(new PostRetrofitImpl(mRetrofit.create(PostRetrofitService.class)), new PostRealmImpl(), this));
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -82,7 +82,7 @@ public class PostActivity extends BaseActivity implements PostView, PostAdapter.
         mAdapter.notifyDataSetChanged();
         Realm realm = Realm.getDefaultInstance();
         List<Post> allSavedCountries = realm.where(Post.class).findAll();
-        Log.d(TAG, "notifyPostChanged: "+allSavedCountries.size());
-       // Post specificCountry = realm.where(Country.class).equalTo("alpha2Code", "AT").findFirst();
+        Log.d(TAG, "notifyPostChanged: " + allSavedCountries.size());
+        // Post specificCountry = realm.where(Country.class).equalTo("alpha2Code", "AT").findFirst();
     }
 }

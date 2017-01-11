@@ -3,9 +3,7 @@ package net.alhazmy13.cachewithnetworkdemo.app;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import net.alhazmy13.cachewithnetworkdemo.R;
@@ -17,6 +15,7 @@ import net.alhazmy13.cachewithnetworkdemo.R;
 public abstract class BaseActivity extends AppCompatActivity {
     private static final String TAG = "BaseActivity";
     private ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +29,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    public void showProgressDialog(){
-        if(mProgressDialog != null && !mProgressDialog.isShowing()){
+    public void showProgressDialog() {
+        if (mProgressDialog != null && !mProgressDialog.isShowing()) {
             mProgressDialog.show();
             return;
         }
@@ -40,12 +39,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         mProgressDialog.show();
     }
 
-    public void hideProgressDialog(){
-        if(mProgressDialog !=null && mProgressDialog.isShowing())
-        mProgressDialog.hide();
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing())
+            mProgressDialog.hide();
     }
 
     public abstract void init();
+
     public abstract void setContentView();
+
     public abstract void checkPermission();
 }
