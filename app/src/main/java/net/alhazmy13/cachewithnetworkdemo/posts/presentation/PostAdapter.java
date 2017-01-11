@@ -13,12 +13,12 @@ import net.alhazmy13.cachewithnetworkdemo.posts.model.model.Post;
 import java.util.List;
 
 
-class MyPostRecyclerViewAdapter extends RecyclerView.Adapter<MyPostRecyclerViewAdapter.ViewHolder> {
+class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private final List<Post> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    MyPostRecyclerViewAdapter(List<Post> items, OnListFragmentInteractionListener listener) {
+    PostAdapter(List<Post> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -33,8 +33,8 @@ class MyPostRecyclerViewAdapter extends RecyclerView.Adapter<MyPostRecyclerViewA
     @Override
     public void onBindViewHolder(final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getId());
-        holder.mContentView.setText(mValues.get(position).getTitle());
+        holder.mIdView.setText(String.valueOf(mValues.get(position).getId()));
+        holder.mContentView.setText(String.valueOf(mValues.get(position).getTitle()));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

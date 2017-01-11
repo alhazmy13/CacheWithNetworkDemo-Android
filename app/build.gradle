@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+
+apply plugin: "io.spring.dependency-management"
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -30,7 +32,7 @@ dependencies {
     //Utility
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
+    compile 'net.alhazmy13.Gota:libary:1.4.1'
 
     //Network
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -48,8 +50,12 @@ dependencies {
     compile 'com.google.dagger:dagger:2.7'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
 
-    //RxAndroid
 
+    compile 'com.amazonaws:aws-android-sdk-core:2.3.8'
+    compile('com.amazonaws:aws-android-sdk-apigateway-core:2.3.8')
+    compile ('com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.3.8')
+
+    //RxAndroid
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
 

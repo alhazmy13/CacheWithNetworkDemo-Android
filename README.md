@@ -4,3 +4,5 @@
 * Realm 
 * Gson 
 * Clean Architecture
+* MVP
+* GOTA

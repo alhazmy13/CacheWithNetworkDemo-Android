@@ -2,23 +2,45 @@ package net.alhazmy13.cachewithnetworkdemo.app;
 
 import android.app.Application;
 
-import net.alhazmy13.cachewithnetworkdemo.Utility.UrlHelper;
+import net.alhazmy13.cachewithnetworkdemo.utility.dagger.AppModule;
+import net.alhazmy13.cachewithnetworkdemo.utility.dagger.DaggerNetComponent;
+import net.alhazmy13.cachewithnetworkdemo.utility.dagger.NetComponent;
+import net.alhazmy13.cachewithnetworkdemo.utility.dagger.NetModule;
+import net.alhazmy13.cachewithnetworkdemo.utility.UrlHelper;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 
 /**
  * Created by alhazmy13 on 1/9/17.
  */
 
 public class App extends Application {
-    private AppComponent mAppComponent;
+    private NetComponent mNetComponent;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mAppComponent = DaggerAppComponent.builder()
+        initRealmConfiguration();
+        mNetComponent = DaggerNetComponent.builder()
+                .appModule(new AppModule(this))
                 .netModule(new NetModule(UrlHelper.getBaseUrl()))
                 .build();
 
+    }
 
+    private void initRealmConfiguration() {
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
+    }
+
+
+    public NetComponent getAppComponent() {
+        return mNetComponent;
     }
 }

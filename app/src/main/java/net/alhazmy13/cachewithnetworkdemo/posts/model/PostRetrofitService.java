@@ -12,7 +12,7 @@ import rx.Observable;
 
 public interface PostRetrofitService {
 
-    @GET("posts")
+    @GET("/posts")
     Observable<Response<List<Post>>> fetchPosts();
 
 }
