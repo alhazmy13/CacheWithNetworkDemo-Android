@@ -1,6 +1,7 @@
-package net.alhazmy13.cachewithnetworkdemo.posts.presentation;
+package net.alhazmy13.cachewithnetworkdemo.posts.presentation.adapter;
 
 import android.annotation.SuppressLint;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +14,12 @@ import net.alhazmy13.cachewithnetworkdemo.posts.model.model.Post;
 import java.util.List;
 
 
-class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private final List<Post> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    PostAdapter(List<Post> items, OnListFragmentInteractionListener listener) {
+    public PostAdapter(List<Post> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -75,5 +76,12 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(int position);
+    }
+
+    public void updateList(List<Post> newList) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PostDiffCallback(mValues, newList));
+        this.mValues.clear();
+        this.mValues.addAll(newList);
+        diffResult.dispatchUpdatesTo(this);
     }
 }

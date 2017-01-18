@@ -20,8 +20,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView();
+        mProgressDialog = new ProgressDialog(this);
         init();
-        checkPermission();
     }
 
     public void showToast(String message) {
@@ -30,18 +30,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     public void showProgressDialog() {
+        mProgressDialog.setMessage(getString(R.string.please_wait));
         if (mProgressDialog != null && !mProgressDialog.isShowing()) {
             mProgressDialog.show();
-            return;
         }
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setMessage(getString(R.string.please_wait));
-        mProgressDialog.show();
     }
 
     public void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing())
-            mProgressDialog.hide();
+            mProgressDialog.dismiss();
     }
 
     public abstract void init();

@@ -49,9 +49,9 @@ class PostPresenter {
                     @Override
                     public void onNext(List<Post> posts) {
                         mView.hideProgressDialog();
+                        mView.notifyPostChanged(posts);
                         postList.clear();
                         postList.addAll(posts);
-                        mView.notifyPostChanged();
 
                     }
                 });

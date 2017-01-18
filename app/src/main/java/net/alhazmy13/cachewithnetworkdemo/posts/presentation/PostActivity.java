@@ -14,6 +14,7 @@ import net.alhazmy13.cachewithnetworkdemo.posts.model.PostRealmImpl;
 import net.alhazmy13.cachewithnetworkdemo.posts.model.PostRetrofitImpl;
 import net.alhazmy13.cachewithnetworkdemo.posts.model.PostRetrofitService;
 import net.alhazmy13.cachewithnetworkdemo.posts.model.model.Post;
+import net.alhazmy13.cachewithnetworkdemo.posts.presentation.adapter.PostAdapter;
 import net.alhazmy13.gota.Gota;
 import net.alhazmy13.gota.GotaResponse;
 
@@ -23,7 +24,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
 import retrofit2.Retrofit;
 
 public class PostActivity extends BaseActivity implements PostView, PostAdapter.OnListFragmentInteractionListener, Gota.OnRequestPermissionsBack {
@@ -55,8 +55,10 @@ public class PostActivity extends BaseActivity implements PostView, PostAdapter.
         ButterKnife.bind(this);
         ((App) getApplicationContext()).getAppComponent().inject(this);
         mAdapter = new PostAdapter(mPresenter.getPostList(), this);
-        mPresenter.init(this, new PostService(new PostRetrofitImpl(mRetrofit.create(PostRetrofitService.class)), new PostRealmImpl(), this));
         recyclerView.setAdapter(mAdapter);
+        mPresenter.init(this, new PostService(new PostRetrofitImpl(mRetrofit.create(PostRetrofitService.class)), new PostRealmImpl(), this));
+        checkPermission();
+
     }
 
     @Override
@@ -78,11 +80,9 @@ public class PostActivity extends BaseActivity implements PostView, PostAdapter.
 
 
     @Override
-    public void notifyPostChanged() {
-        mAdapter.notifyDataSetChanged();
-        Realm realm = Realm.getDefaultInstance();
-        List<Post> allSavedCountries = realm.where(Post.class).findAll();
-        Log.d(TAG, "notifyPostChanged: " + allSavedCountries.size());
-        // Post specificCountry = realm.where(Country.class).equalTo("alpha2Code", "AT").findFirst();
+    public void notifyPostChanged(List<Post> list) {
+        mAdapter.updateList(list);
     }
+
+
 }
