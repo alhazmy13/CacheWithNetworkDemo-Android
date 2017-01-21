@@ -7,6 +7,8 @@ import net.alhazmy13.cachewithnetworkdemo.utility.NetworkParser;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit2.Response;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -17,6 +19,7 @@ public class PostRetrofitImpl implements PostRepository {
     private static final String TAG = "UserRetrofitImpl";
     private PostRetrofitService mRetrofitService;
 
+    @Inject
     public PostRetrofitImpl(PostRetrofitService retrofitService) {
         this.mRetrofitService = retrofitService;
     }

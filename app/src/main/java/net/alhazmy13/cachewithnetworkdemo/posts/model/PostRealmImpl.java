@@ -6,6 +6,8 @@ import net.alhazmy13.cachewithnetworkdemo.posts.model.model.Post;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
@@ -15,6 +17,7 @@ public class PostRealmImpl implements PostRepository {
     private static final String TAG = "UserRetrofitImpl";
     private Realm mRealm;
 
+    @Inject
     public PostRealmImpl() {
         this.mRealm = Realm.getDefaultInstance();
     }

@@ -5,8 +5,10 @@ import android.app.Application;
 import net.alhazmy13.cachewithnetworkdemo.utility.UrlHelper;
 import net.alhazmy13.cachewithnetworkdemo.utility.dagger.AppModule;
 import net.alhazmy13.cachewithnetworkdemo.utility.dagger.DaggerNetComponent;
+import net.alhazmy13.cachewithnetworkdemo.utility.dagger.ImplModule;
 import net.alhazmy13.cachewithnetworkdemo.utility.dagger.NetComponent;
 import net.alhazmy13.cachewithnetworkdemo.utility.dagger.NetModule;
+import net.alhazmy13.cachewithnetworkdemo.utility.dagger.ServicesModule;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -27,6 +29,8 @@ public class App extends Application {
         mNetComponent = DaggerNetComponent.builder()
                 .appModule(new AppModule(this))
                 .netModule(new NetModule(UrlHelper.getBaseUrl()))
+                .servicesModule(new ServicesModule())
+                .implModule(new ImplModule())
                 .build();
 
     }

@@ -15,12 +15,14 @@ import net.alhazmy13.cachewithnetworkdemo.posts.model.PostRetrofitImpl;
 import net.alhazmy13.cachewithnetworkdemo.posts.model.PostRetrofitService;
 import net.alhazmy13.cachewithnetworkdemo.posts.model.model.Post;
 import net.alhazmy13.cachewithnetworkdemo.posts.presentation.adapter.PostAdapter;
+import net.alhazmy13.cachewithnetworkdemo.utility.Constant;
 import net.alhazmy13.gota.Gota;
 import net.alhazmy13.gota.GotaResponse;
 
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,11 +33,11 @@ public class PostActivity extends BaseActivity implements PostView, PostAdapter.
 
     @Inject
     PostPresenter mPresenter;
-    @Inject
-    Retrofit mRetrofit;
     private PostAdapter mAdapter;
     @BindView(R.id.list)
     RecyclerView recyclerView;
+    @Inject @Named(Constant.Named.NetworkWithRealmCaching)
+    PostService mService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class PostActivity extends BaseActivity implements PostView, PostAdapter.
         ((App) getApplicationContext()).getAppComponent().inject(this);
         mAdapter = new PostAdapter(mPresenter.getPostList(), this);
         recyclerView.setAdapter(mAdapter);
-        mPresenter.init(this, new PostService(new PostRetrofitImpl(mRetrofit.create(PostRetrofitService.class)), new PostRealmImpl(), this));
+        mPresenter.init(this, mService);
         checkPermission();
 
     }
